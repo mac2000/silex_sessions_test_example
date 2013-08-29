@@ -11,6 +11,7 @@ class Application extends BaseApplication {
 
         $this->register(new SessionServiceProvider());
 
+        // the route we wish to test
         $this->get('/test', function(){
             if($this['session']->get('test', false)) {
                 return 'SESSION DETECTED';
@@ -19,6 +20,7 @@ class Application extends BaseApplication {
             }
         });
 
+        // temporary route for hands testing
         $this->get('/set', function(){
             $this['session']->set('test', true);
             return $this->redirect('/test');
