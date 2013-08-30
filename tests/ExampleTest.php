@@ -7,6 +7,8 @@ use Symfony\Component\HttpKernel\HttpKernel;
 class ExampleTest extends WebTestCase {
     public function testOne() {
         $client = $this->createClient();
+        $client->followRedirects();
+        $crawler = $client->request('GET', '/set');
         // What is right way, to define $_SESSION values?
         $crawler = $client->request('GET', '/test');
 
