@@ -10,6 +10,7 @@ class ExampleCustomWebTestCaseFunctionalTest extends WebTestCase {
         $client = $this->createClient();
         $crawler = $client->request('GET', '/test');
 
+        $this->assertTrue($client->getResponse()->isOk());
         $this->assertContains('SESSION DETECTED', $crawler->html());
     }
 
@@ -17,6 +18,7 @@ class ExampleCustomWebTestCaseFunctionalTest extends WebTestCase {
         $client = $this->createClient();
         $crawler = $client->request('GET', '/test');
 
+        $this->assertTrue($client->getResponse()->isOk());
         $this->assertContains('nothing', $crawler->html());
     }
 }

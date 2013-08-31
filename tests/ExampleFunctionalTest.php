@@ -7,10 +7,13 @@ use Symfony\Component\HttpKernel\HttpKernel;
 class ExampleFunctionalTest extends WebTestCase {
     public function testOne() {
         $client = $this->createClient();
-        $client->followRedirects();
         $crawler = $client->request('GET', '/set');
-        $crawler = $client->request('GET', '/test');
 
+        $this->assertTrue($client->getResponse()->isRedirect('/test'));
+
+        $crawler = $client->followRedirect();
+
+        $this->assertTrue($client->getResponse()->isOk());
         $this->assertContains('SESSION DETECTED', $crawler->html());
     }
 
@@ -18,6 +21,7 @@ class ExampleFunctionalTest extends WebTestCase {
         $client = $this->createClient();
         $crawler = $client->request('GET', '/test');
 
+        $this->assertTrue($client->getResponse()->isOk());
         $this->assertContains('nothing', $crawler->html());
     }
 
